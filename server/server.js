@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname + '/app')));
 
 app.set('port', (process.env.PORT || 5000));
 
-// Expense Data
+// Expense Data : initial data to fill
 let expenesesList ={
     data: [
         {

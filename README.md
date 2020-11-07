@@ -1,6 +1,6 @@
 # expenses-tracker
 
-> A Vue.js project
+> A Vue.js Expenses Tracker Project
 
 ## Build Setup
 
@@ -8,12 +8,15 @@
 # install dependencies
 npm install
 
+# run client side
+cd client
+
 # serve with hot reload at localhost:8080
-npm run dev
+npm run serve
 
-# build for production with minification
-npm run build
+# run server side
+cd server
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# start server
+npm start
 ```
