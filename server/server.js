@@ -16,47 +16,49 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname + '/app')));
 
-app.set('port', (process.env.PORT || 4000));
-
-app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
-});
+app.set('port', (process.env.PORT || 5000));
 
 // Expense Data
 let expenesesList ={
     data: [
         {
-            name: "MacWings",
-            expense: 5,
+            name: "MacWings meal",
+            expense: 10,
             date: "01/11/2020"
         },
         {
-            name: "Fries",
-            expense: 5,
+            name: "Google Pixel",
+            expense: 3000,
+            date: "10/11/2020"
+        },
+        {
+            name: "Whiteboard",
+            expense: 100,
             date: "01/11/2020"
         }
     ]
 }
 
 // get all expenses
-app.get('/expenses', (req, res) =>{
+app.get('/finances', (req, res) =>{
     res.send(expenesesList);
 })
 
+// add a new expense
 app.post('/expense/add', (req, res) => {
     let expense = Number(req.body.expense)
     let name = req.body.name
     let date = req.body.date;
 
     let newExpense  = {
-        name = name,
+        name : name,
         expense: expense,
         date: date
     };
 
     expensesList.data.push(newExpense);
 
-    pusher.trigger('finance', 'new-expense', {
+    pusher.trigger('finances', 'new-expense', {
         newExpense: expensesList
     });
 
@@ -67,4 +69,8 @@ app.post('/expense/add', (req, res) => {
         date: date,
         data: expensesList
     })
+});
+
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
 });
