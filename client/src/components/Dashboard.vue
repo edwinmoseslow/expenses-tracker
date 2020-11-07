@@ -3,7 +3,7 @@
         <table>
             <tr>
                 <td>
-                    <ExpensesTable :expense="childData"/>
+                    <ExpensesTable :expense="childData" :preloaded="preloadedList"/>
                 </td>
                 <td>
                     <ExpensesForm @expense="addExpense" />
@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <ExpensesChart />
+                    <ExpensesChart :expense="childData" :preloaded="preloadedList"/>
                 </td>
             </tr>
         </table>
@@ -36,7 +36,20 @@ export default {
                 name: "",
                 date: "",
                 amount: ""
-            }
+            },
+            preloadedList: [{
+                name: "Play Station 5",
+                date: "2020-10-01",
+                amount: "3000"
+            }, {
+                name: "Insurance",
+                date: "2020-11-01",
+                amount: "2000"
+            }, {
+                name: "Drum Pad",
+                date: "2020-02-01",
+                amount: "100"
+            }]
         };
     },
     methods: {
@@ -70,5 +83,6 @@ table {
 
 td {
     border: 3px black solid;
+    vertical-align: baseline;
 }
 </style>

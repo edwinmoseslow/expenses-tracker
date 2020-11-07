@@ -31,6 +31,7 @@ export default {
             date: String,
             amount: String
         },
+        preloadedList: []
     },
     data: function() {
         return {
@@ -39,8 +40,9 @@ export default {
     },
     watch: {
         expense: function () {
-            console.log("updating expenses list")
+            console.log("Updating expenses list")
             this.expensesList.push(this.expense);
+            // this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
         },
     },
 };
