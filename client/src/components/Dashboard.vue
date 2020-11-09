@@ -39,16 +39,32 @@ export default {
             },
             preloadedList: [{
                 name: "Play Station 5",
-                date: "2020-10-01",
+                date: "2020-01-01",
                 amount: "3000"
             }, {
                 name: "Insurance",
-                date: "2020-11-01",
+                date: "2020-02-01",
                 amount: "2000"
             }, {
                 name: "Drum Pad",
-                date: "2020-02-01",
+                date: "2020-03-01",
                 amount: "100"
+            }, {
+                name: "Food",
+                date: "2020-04-01",
+                amount: "300"
+            }, {
+                name: "Fast Food",
+                date: "2020-05-01",
+                amount: "200"
+            }, {
+                name: "Bills",
+                date: "2020-06-01",
+                amount: "4000"
+            }, {
+                name: "Online Course",
+                date: "2020-07-01",
+                amount: "500"
             }]
         };
     },

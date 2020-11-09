@@ -10,7 +10,9 @@ export default {
             date: String,
             amount: String
         },
-        preloadedList: []
+        preloaded: {
+            type: Array
+        }
     },
     data: function() {
         return {
@@ -27,7 +29,11 @@ export default {
             this.updateChart();
         }
     },
-    mounted () {
+    created() {
+        var i = -1
+        while (++i < this.preloaded.length) {
+            this.expensesList.push(this.preloaded[i]);
+        }
         this.updateChart();
     },
     methods: {

@@ -31,12 +31,20 @@ export default {
             date: String,
             amount: String
         },
-        preloadedList: []
+        preloaded: {
+            type: Array
+        }
     },
     data: function() {
         return {
             expensesList: [],
         };
+    },
+    created() {
+        var i = -1
+        while (++i < this.preloaded.length) {
+            this.expensesList.push(this.preloaded[i]);
+        }
     },
     watch: {
         expense: function () {
