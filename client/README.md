@@ -1,24 +1,14 @@
-# client
-
-## Project setup
+### Todo
 ```
-npm install
+allow the expenses list to be sorted on the table componment
+allow the chart to sort the expenses in a chronological order
+allow the expenses to be deleted and edited(CRUD)
+handle the updating of component properly
 ```
-
-### Compiles and hot-reloads for development
+### Future Development
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+add server-side
+add REST API
+add MongoDB
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

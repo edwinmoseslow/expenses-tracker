@@ -3,14 +3,18 @@ import { Line } from 'vue-chartjs'
 
 export default {
     extends: Line,
-    name: "ExpenseChart",
+    name: "ExpensesChart",
     props: {
         expense: {
             name: String,
             date: String,
-            amount: String
+            amount: String,
+            edit: Boolean
         },
         preloaded: {
+            type: Array
+        },
+        updatedList: {
             type: Array
         }
     },
@@ -21,15 +25,27 @@ export default {
     },
     watch: {
         expense: function () {
-            console.log("Updating expenses list")
+            console.log("Chart : Updating expenses list")
             this.expensesList.push(this.expense);
+
+            this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
+
+            this.updateChart();
         },
-        expensesList: function () {
-            // this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
+        updatedList: function () {
+            this.expensesList = []
+
+            var i = -1
+            while (++i < this.updatedList.length) {
+                this.expensesList.push(this.updatedList[i]);
+            }
+
+            this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
+
             this.updateChart();
         }
     },
-    created() {
+    mounted() {
         var i = -1
         while (++i < this.preloaded.length) {
             this.expensesList.push(this.preloaded[i]);

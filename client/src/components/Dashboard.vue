@@ -3,7 +3,7 @@
         <table>
             <tr>
                 <td>
-                    <ExpensesTable :expense="childData" :preloaded="preloadedList"/>
+                    <ExpensesTable @updateExList="updateExpenses" :expense="childData" :preloaded="sharedExpensesList"/>
                 </td>
                 <td>
                     <ExpensesForm @expense="addExpense" />
@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <ExpensesChart :expense="childData" :preloaded="preloadedList"/>
+                    <ExpensesChart :expense="childData" :preloaded="sharedExpensesList" :updatedList="sharedExpensesList"/>
                 </td>
             </tr>
         </table>
@@ -35,51 +35,70 @@ export default {
             childData: {
                 name: "",
                 date: "",
-                amount: ""
+                amount: "",
+                edit: false
             },
-            preloadedList: [{
+            sharedExpensesList: [{
                 name: "Play Station 5",
                 date: "2020-01-01",
-                amount: "3000"
+                amount: "3000",
+                edit: false
             }, {
                 name: "Insurance",
                 date: "2020-02-01",
-                amount: "2000"
+                amount: "2000",
+                edit: false
             }, {
                 name: "Drum Pad",
                 date: "2020-03-01",
-                amount: "100"
+                amount: "100",
+                edit: false
             }, {
                 name: "Food",
                 date: "2020-04-01",
-                amount: "300"
+                amount: "300",
+                edit: false
             }, {
                 name: "Fast Food",
                 date: "2020-05-01",
-                amount: "200"
+                amount: "200",
+                edit: false
             }, {
                 name: "Bills",
                 date: "2020-06-01",
-                amount: "4000"
+                amount: "4000",
+                edit: false
             }, {
                 name: "Online Course",
                 date: "2020-07-01",
-                amount: "500"
+                amount: "500",
+                edit: false
             }]
         };
     },
     methods: {
-        addExpense(variable){
+        addExpense(newExpense){
             console.log("Adding: ")
-            console.log(variable.name)
-            console.log(variable.date)
-            console.log(variable.amount)
+            console.log(newExpense.name)
+            console.log(newExpense.date)
+            console.log(newExpense.amount)
 
             this.childData = {
-                name: variable.name,
-                date: variable.date,
-                amount: variable.amount
+                name: newExpense.name,
+                date: newExpense.date,
+                amount: newExpense.amount,
+                edit: newExpense.edit
             };
+        },
+        updateExpenses(expenseList){
+            console.log("Updating : List")
+            console.log(expenseList)
+
+            this.sharedExpensesList = []
+            
+            expenseList.forEach(element => {
+                this.sharedExpensesList.push(element)
+            })
         }
     }
 };
