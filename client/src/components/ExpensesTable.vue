@@ -1,19 +1,25 @@
 <template>
     <div>
-        <p>Expenses Table</p>
+        <p class="title">Expenses Table</p>
         <table>
             <tr>
                 <!-- <th @click="sort('index')">
                     Expenses No.
                 </th> -->
                 <th v-on:click="sort('name')">
-                    Expenses Name
+                    <p v-show="sortKey.name === 1">Expenses Name</p>
+                    <p v-show="sortKey.name === 3">Expenses Name &#8650;</p>
+                    <p v-show="sortKey.name === 2">Expenses Name &#8648;</p> 
                 </th>
                  <th v-on:click="sort('date')">
-                    Expenses Date
+                    <p v-show="sortKey.date === 1">Expenses Date</p>
+                    <p v-show="sortKey.date === 3">Expenses Date &#8650;</p>
+                    <p v-show="sortKey.date === 2">Expenses Date &#8648;</p> 
                 </th>
                 <th v-on:click="sort('amount')">
-                    Expenses Amount
+                    <p v-show="sortKey.amount === 1">Expenses Amount</p>
+                    <p v-show="sortKey.amount === 3">Expenses Amount &#8650;</p>
+                    <p v-show="sortKey.amount === 2">Expenses Amount &#8648;</p>
                 </th>
                 <th>
                     Actions
@@ -65,22 +71,26 @@ export default {
         return {
             expensesList: [],
             sortKey: {
-                name: false,
-                date: false,
-                amount: false
+                name: 1,
+                date: 1,
+                amount: 1
             }
         };
     },
     created() {
         var i = -1
         while (++i < this.preloaded.length) {
-            this.expensesList.push(this.preloaded[i]);
+            this.expensesList.push(this.preloaded[i])
         }
     },
     watch: {
         expense: function () {
             console.log("Table : Updating expenses list")
-            this.expensesList.push(this.expense);
+            this.expensesList.push(this.expense)
+
+            this.sortKey.amount = 1
+            this.sortKey.name = 1
+            this.sortKey.date = 1
         }
     },
     methods: {
@@ -140,36 +150,56 @@ export default {
         sort:function(key) {
             console.log("Sorting")
             if(key === "name") {
-                if(this.sortKey.name){
-                    // asc
-                    this.expensesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
-                    this.sortKey.name = false
-                } else {
-                    // desc
-                    this.expensesList.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1)
-                    this.sortKey.name = true
+                switch(this.sortKey.name) {
+                    case 1:
+                    case 2:
+                        this.expensesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
+                        this.sortKey.name = 3
+                        this.sortKey.date = 1
+                        this.sortKey.amount = 1
+                        break
+                    case 3:
+                        this.expensesList.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1)
+                        this.sortKey.name = 2
+                        this.sortKey.date = 1
+                        this.sortKey.amount = 1
+                        break
                 }
-                
-                
             } else if(key === "date") {
-               if(this.sortKey.date){
-                    // asc
-                    this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
-                    this.sortKey.date = false
-                } else {
-                    // desc
-                    this.expensesList.sort((a, b) => (a.date < b.date) ? 1 : -1)
-                    this.sortKey.date = true
+                switch(this.sortKey.date){
+                    case 1:
+                    case 2:
+                        // asc
+                        this.expensesList.sort((a, b) => (a.date > b.date) ? 1 : -1)
+                        this.sortKey.date = 3
+                        this.sortKey.name = 1
+                        this.sortKey.amount = 1
+                        break
+                    case 3:
+                        // desc
+                        this.expensesList.sort((a, b) => (a.date < b.date) ? 1 : -1)
+                        this.sortKey.date = 2
+                        this.sortKey.name = 1
+                        this.sortKey.amount = 1
+                        break
                 }
             } else if(key === "amount") {
-               if(this.sortKey.amount){
-                    // asc
-                    this.expensesList.sort((a, b) => (a.amount - b.amount))
-                    this.sortKey.amount = false
-                } else {
-                    // desc
-                    this.expensesList.sort((a, b) => (b.amount - a.amount))
-                    this.sortKey.amount = true
+               switch(this.sortKey.amount){
+                    case 1:
+                    case 2:
+                        // asc
+                        this.expensesList.sort((a, b) => (a.amount - b.amount))
+                        this.sortKey.amount = 3
+                        this.sortKey.name = 1
+                        this.sortKey.date = 1
+                        break
+                    case 3:
+                        // desc
+                        this.expensesList.sort((a, b) => (b.amount - a.amount))
+                        this.sortKey.amount = 2
+                        this.sortKey.name = 1
+                        this.sortKey.date = 1
+                        break
                 }
             }
         }
@@ -197,7 +227,7 @@ button {
     margin-bottom: 2px;
 }
 
-p {
+.title {
     font-weight: bold;
     font-size: larger;
 }
