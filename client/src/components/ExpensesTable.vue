@@ -7,17 +7,17 @@
                     Expenses No.
                 </th> -->
                 <th v-on:click="sort('name')">
-                    <p v-show="sortKey.name === 1">Expenses Name</p>
+                    <p v-show="sortKey.name === 1">Expenses Name &#8645;</p>
                     <p v-show="sortKey.name === 3">Expenses Name &#8650;</p>
                     <p v-show="sortKey.name === 2">Expenses Name &#8648;</p> 
                 </th>
                  <th v-on:click="sort('date')">
-                    <p v-show="sortKey.date === 1">Expenses Date</p>
+                    <p v-show="sortKey.date === 1">Expenses Date &#8645;</p>
                     <p v-show="sortKey.date === 3">Expenses Date &#8650;</p>
                     <p v-show="sortKey.date === 2">Expenses Date &#8648;</p> 
                 </th>
                 <th v-on:click="sort('amount')">
-                    <p v-show="sortKey.amount === 1">Expenses Amount</p>
+                    <p v-show="sortKey.amount === 1">Expenses Amount &#8645;</p>
                     <p v-show="sortKey.amount === 3">Expenses Amount &#8650;</p>
                     <p v-show="sortKey.amount === 2">Expenses Amount &#8648;</p>
                 </th>
